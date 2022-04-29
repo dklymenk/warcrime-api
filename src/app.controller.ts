@@ -23,7 +23,7 @@ export class AppController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: './files',
+        destination: './public/files',
         filename: (_req, file, callback) => {
           const name = file.originalname.split('.')[0];
           const fileExtName = extname(file.originalname);
