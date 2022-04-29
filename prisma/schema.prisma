@@ -17,9 +17,10 @@ enum ReportStatus {
 }
 
 model Report {
-  id           String       @id
-  description  String
-  photo        String
-  userId       String
-  reportStatus ReportStatus
+  id          String       @id
+  description String
+  photo       String
+  userId      String
+  status      ReportStatus
+  latlong     String?
 }

@@ -1,5 +1,12 @@
 import { ReportStatus } from '@prisma/client';
-import { IsEnum, IsNotEmpty, IsUrl, IsUUID } from 'class-validator';
+import {
+  IsEnum,
+  IsLatLong,
+  IsNotEmpty,
+  IsOptional,
+  IsUrl,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateReportDto {
   @IsUUID()
@@ -12,8 +19,12 @@ export class CreateReportDto {
   photo: string;
 
   @IsEnum(ReportStatus)
-  reportStatus: ReportStatus;
+  status: ReportStatus;
 
   @IsUUID()
   userId: string;
+
+  @IsLatLong()
+  @IsOptional()
+  latlong?: string;
 }
