@@ -8,6 +8,14 @@ TODO
 
 ```bash
 yarn install
+cp .env.example .env
+```
+
+Update the database and other credentials in the `.env` file.
+
+```bash
+yarn prisma migrate deploy
+yarn prisma generate
 ```
 
 ## Running the app
@@ -20,6 +28,7 @@ yarn start
 yarn start:dev
 
 # production mode
+yarn build
 yarn start:prod
 ```
 
