@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin"
+      }
+    ],
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,

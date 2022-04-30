@@ -8,6 +8,7 @@ import { AdminModule } from '@adminjs/nestjs';
 import { Database, Resource } from '@adminjs/prisma';
 import { PrismaClient } from '@prisma/client';
 import { DMMFClass } from '@prisma/client/runtime';
+import { ConfigModule } from '@nestjs/config';
 
 AdminJS.registerAdapter({ Database, Resource });
 
@@ -16,11 +17,18 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
 
 @Module({
   imports: [
+    ConfigModule,
     ReportsModule,
     PrismaModule,
     AdminModule.createAdmin({
       adminJsOptions: {
         rootPath: '/admin',
+        branding: {
+          companyName: 'Харківська правозахисна група',
+        },
+        dashboard: {
+          component: AdminJS.bundle('./admin/components/dashboard'),
+        },
         resources: [
           {
             resource: { model: dmmf.modelMap.Report, client: prisma },
@@ -47,6 +55,21 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
             },
           },
         ],
+      },
+      auth: {
+        authenticate: async (email, password) => {
+          if (email !== process.env.ADMIN_EMAIL) {
+            return null;
+          }
+
+          if (password !== process.env.ADMIN_PASSWORD) {
+            return null;
+          }
+
+          return Promise.resolve({ email });
+        },
+        cookieName: process.env.ADMIN_COOKIE_NAME,
+        cookiePassword: process.env.ADMIN_COOKIE_PASSWORD,
       },
     }),
   ],
