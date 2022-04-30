@@ -24,7 +24,27 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
         resources: [
           {
             resource: { model: dmmf.modelMap.Report, client: prisma },
-            options: {},
+            options: {
+              listProperties: [
+                'description',
+                'photo',
+                'status',
+                'userId',
+                'latLong',
+              ],
+              properties: {
+                photo: {
+                  components: {
+                    show: AdminJS.bundle(
+                      './admin/components/report-photo-show',
+                    ),
+                    list: AdminJS.bundle(
+                      './admin/components/report-photo-list',
+                    ),
+                  },
+                },
+              },
+            },
           },
         ],
       },
