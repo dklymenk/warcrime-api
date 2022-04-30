@@ -22,5 +22,5 @@ model Report {
   photo       String
   userId      String
   status      ReportStatus
-  latlong     String?
+  latLong     String?
 }

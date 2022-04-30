@@ -26,5 +26,5 @@ export class CreateReportDto {
 
   @IsLatLong()
   @IsOptional()
-  latlong?: string;
+  latLong?: string;
 }
