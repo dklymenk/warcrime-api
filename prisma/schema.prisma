@@ -23,4 +23,5 @@ model Report {
   userId      String
   status      ReportStatus @default(UPLOADED)
   latLong     String?
+  createdAt   DateTime     @default(now())
 }

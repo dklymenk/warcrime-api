@@ -34,12 +34,19 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
             resource: { model: dmmf.modelMap.Report, client: prisma },
             options: {
               listProperties: [
+                'createdAt',
                 'description',
                 'photo',
+                'latLong',
                 'status',
                 'userId',
-                'latLong',
               ],
+              editProperties: ['status'],
+              actions: { new: { isAccessible: false } },
+              sort: {
+                sortBy: 'createdAt',
+                direction: 'desc',
+              },
               properties: {
                 photo: {
                   components: {
