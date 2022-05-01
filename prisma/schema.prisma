@@ -21,6 +21,6 @@ model Report {
   description String
   photo       String
   userId      String
-  status      ReportStatus
+  status      ReportStatus @default(UPLOADED)
   latLong     String?
 }

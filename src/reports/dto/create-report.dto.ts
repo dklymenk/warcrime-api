@@ -1,6 +1,4 @@
-import { ReportStatus } from '@prisma/client';
 import {
-  IsEnum,
   IsLatLong,
   IsNotEmpty,
   IsOptional,
@@ -17,9 +15,6 @@ export class CreateReportDto {
 
   @IsUrl()
   photo: string;
-
-  @IsEnum(ReportStatus)
-  status: ReportStatus;
 
   @IsUUID()
   userId: string;
