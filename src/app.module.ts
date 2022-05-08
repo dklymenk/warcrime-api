@@ -9,6 +9,11 @@ import { Database, Resource } from '@adminjs/prisma';
 import { PrismaClient } from '@prisma/client';
 import { DMMFClass } from '@prisma/client/runtime';
 import { ConfigModule } from '@nestjs/config';
+import {
+  Dashboard,
+  ReportPhotoList,
+  ReportPhotoShow,
+} from './admin/components';
 
 AdminJS.registerAdapter({ Database, Resource });
 
@@ -27,7 +32,7 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
           companyName: 'Харківська правозахисна група',
         },
         dashboard: {
-          component: AdminJS.bundle('./admin/components/dashboard'),
+          component: Dashboard,
         },
         resources: [
           {
@@ -50,12 +55,8 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
               properties: {
                 photo: {
                   components: {
-                    show: AdminJS.bundle(
-                      './admin/components/report-photo-show',
-                    ),
-                    list: AdminJS.bundle(
-                      './admin/components/report-photo-list',
-                    ),
+                    show: ReportPhotoShow,
+                    list: ReportPhotoList,
                   },
                 },
               },
