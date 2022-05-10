@@ -13,6 +13,8 @@ import {
   Dashboard,
   ReportPhotoList,
   ReportPhotoShow,
+  ReportLatLongList,
+  ReportLatLongShow,
 } from './admin/components';
 
 AdminJS.registerAdapter({ Database, Resource });
@@ -57,6 +59,12 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
                   components: {
                     show: ReportPhotoShow,
                     list: ReportPhotoList,
+                  },
+                },
+                latLong: {
+                  components: {
+                    list: ReportLatLongList,
+                    show: ReportLatLongShow,
                   },
                 },
               },
