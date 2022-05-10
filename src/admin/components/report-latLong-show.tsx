@@ -5,7 +5,10 @@ const ReportLatLongShow = (props: BasePropertyProps) => {
   const { record, property } = props;
   return (
     <ValueGroup label={property.label}>
-      <a href={`https://maps.google.com/?q=${record.params[property.path]}`}>
+      <a
+        target="_blank"
+        href={`https://maps.google.com/?q=${record.params[property.path]}`}
+      >
         {record.params[property.path]}
       </a>
     </ValueGroup>
