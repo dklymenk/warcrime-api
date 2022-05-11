@@ -74,11 +74,19 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
       },
       auth: {
         authenticate: async (email, password) => {
-          if (email !== process.env.ADMIN_EMAIL) {
+          let adminUsers: { email: string; password: string }[];
+
+          try {
+            adminUsers = JSON.parse(process.env.ADMIN_USERS);
+          } catch (error) {
             return null;
           }
 
-          if (password !== process.env.ADMIN_PASSWORD) {
+          const user = adminUsers.find(
+            (u) => u.email === email && u.password === password,
+          );
+
+          if (!user) {
             return null;
           }
 
