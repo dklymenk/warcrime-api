@@ -13,7 +13,7 @@ export class CreateReportDto {
   @IsNotEmpty()
   description: string;
 
-  @IsUrl()
+  @IsUrl({ require_tld: false })
   photo: string;
 
   @IsUUID()
