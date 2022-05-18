@@ -10,6 +10,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'), {
     setHeaders: (res) => res.setHeader('Access-Control-Allow-Origin', '*'),
   });
+  app.enableCors();
   await app.listen(process.env.PORT || '3000');
 }
 bootstrap();
