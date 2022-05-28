@@ -10,7 +10,7 @@ import { extname } from 'path';
 
 @Controller('upload')
 export class UploadController {
-  @Post('upload')
+  @Post()
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
