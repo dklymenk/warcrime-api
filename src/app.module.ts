@@ -16,6 +16,7 @@ import {
   ReportLatLongList,
   ReportLatLongShow,
 } from './admin/components';
+import { UploadModule } from './upload/upload.module';
 
 AdminJS.registerAdapter({ Database, Resource });
 
@@ -96,6 +97,7 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
         cookiePassword: process.env.ADMIN_COOKIE_PASSWORD,
       },
     }),
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],
