@@ -6,6 +6,7 @@ import {
   Button,
   Icon,
   Input,
+  Label,
 } from '@adminjs/design-system';
 
 import { RouteComponentProps, withRouter } from 'react-router';
@@ -16,6 +17,7 @@ import {
   ActionProps,
   AddNoticeProps,
   ApiClient,
+  PropertyLabel,
   useTranslation,
   withNotice,
 } from 'adminjs';
@@ -75,6 +77,7 @@ const ReportBulkDescriptionEdit: React.FC<
     <React.Fragment>
       <DrawerContent>
         {action?.showInDrawer ? <ActionHeader omitActions {...props} /> : null}
+        <Label>{translateMessage('description', resource.id)}</Label>
         <Input
           as="textarea"
           value={description}
@@ -89,9 +92,7 @@ const ReportBulkDescriptionEdit: React.FC<
           disabled={loading}
         >
           {loading ? <Icon icon="Fade" spin /> : null}
-          {translateButton('confirmRemovalMany', resource.id, {
-            count: records.length,
-          })}
+          {translateButton('confirm')}
         </Button>
       </DrawerFooter>
     </React.Fragment>

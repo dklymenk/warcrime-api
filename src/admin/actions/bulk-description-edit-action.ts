@@ -39,9 +39,7 @@ export const bulkDescriptionEditAction: Action<BulkActionResponse> = {
       return {
         records: records.map((record) => record.toJSON(context.currentAdmin)),
         notice: {
-          message: translateMessage('successfullyBulkDeleted', resource.id(), {
-            count: records.length,
-          }),
+          message: translateMessage('success'),
           type: 'success',
         },
         redirectUrl: h.resourceUrl({
