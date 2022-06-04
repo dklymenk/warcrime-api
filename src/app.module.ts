@@ -17,6 +17,7 @@ import {
   ReportLatLongShow,
 } from './admin/components';
 import { UploadModule } from './upload/upload.module';
+import { bulkDescriptionEditAction } from './admin/actions';
 
 AdminJS.registerAdapter({ Database, Resource });
 
@@ -50,7 +51,10 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
                 'userId',
               ],
               editProperties: ['status'],
-              actions: { new: { isAccessible: false } },
+              actions: {
+                new: { isAccessible: false },
+                bulkDescriptionEdit: bulkDescriptionEditAction,
+              },
               sort: {
                 sortBy: 'createdAt',
                 direction: 'desc',
