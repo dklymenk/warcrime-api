@@ -17,7 +17,6 @@ import {
   ActionProps,
   AddNoticeProps,
   ApiClient,
-  PropertyLabel,
   useTranslation,
   withNotice,
 } from 'adminjs';
