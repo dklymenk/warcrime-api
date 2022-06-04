@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import {
-  Table,
-  TableBody,
-  TableRow,
-  TableCell,
   Text,
   DrawerContent,
   DrawerFooter,
   Button,
-  MessageBox,
   Icon,
   Input,
 } from '@adminjs/design-system';
@@ -21,7 +16,6 @@ import {
   ActionProps,
   AddNoticeProps,
   ApiClient,
-  BasePropertyComponent,
   useTranslation,
   withNotice,
 } from 'adminjs';
@@ -81,34 +75,11 @@ const ReportBulkDescriptionEdit: React.FC<
     <React.Fragment>
       <DrawerContent>
         {action?.showInDrawer ? <ActionHeader omitActions {...props} /> : null}
-        <MessageBox
-          mb="xxl"
-          variant="danger"
-          message={translateMessage('theseRecordsWillBeRemoved', resource.id, {
-            count: records.length,
-          })}
+        <Input
+          as="textarea"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
-        <Table>
-          <TableBody>
-            {records.map((record) => (
-              <TableRow key={record.id}>
-                <TableCell>
-                  <BasePropertyComponent
-                    where="list"
-                    property={resource.titleProperty}
-                    resource={resource}
-                    record={record}
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
-            <Input
-              as="textarea"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </TableBody>
-        </Table>
       </DrawerContent>
       <DrawerFooter>
         <Button

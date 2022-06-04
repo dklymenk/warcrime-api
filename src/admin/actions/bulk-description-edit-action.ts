@@ -1,10 +1,18 @@
-import { ActionContext, ActionRequest, ActionResponse } from 'adminjs';
+import {
+  ActionContext,
+  ActionRequest,
+  ActionResponse,
+  Action,
+  BulkActionResponse,
+} from 'adminjs';
 import { ReportBulkDescriptionEdit } from '../components';
 
-export const bulkDescriptionEditAction = {
+export const bulkDescriptionEditAction: Action<BulkActionResponse> = {
+  name: 'bulkDescriptionEdit',
   actionType: 'bulk',
-  icon: 'View',
+  icon: 'Edit',
   isVisible: true,
+  showInDrawer: true,
   handler: async (
     request: ActionRequest,
     _response: ActionResponse,
