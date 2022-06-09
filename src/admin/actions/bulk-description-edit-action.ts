@@ -13,6 +13,8 @@ export const bulkDescriptionEditAction: Action<BulkActionResponse> = {
   icon: 'Edit',
   isVisible: true,
   showInDrawer: true,
+  isAccessible: ({ currentAdmin }) =>
+    currentAdmin && currentAdmin.role === 'admin',
   handler: async (
     request: ActionRequest,
     _response: ActionResponse,

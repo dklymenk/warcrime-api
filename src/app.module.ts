@@ -65,11 +65,7 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
                   isAccessible: ({ currentAdmin }) =>
                     currentAdmin && currentAdmin.role === 'admin',
                 },
-                bulkDescriptionEdit: {
-                  handler: bulkDescriptionEditAction,
-                  isAccessible: ({ currentAdmin }) =>
-                    currentAdmin && currentAdmin.role === 'admin',
-                },
+                bulkDescriptionEdit: bulkDescriptionEditAction,
               },
               sort: {
                 sortBy: 'createdAt',
