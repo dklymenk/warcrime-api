@@ -53,7 +53,23 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
               editProperties: ['status'],
               actions: {
                 new: { isAccessible: false },
-                bulkDescriptionEdit: bulkDescriptionEditAction,
+                delete: {
+                  isAccessible: ({ currentAdmin }) =>
+                    currentAdmin && currentAdmin.role === 'admin',
+                },
+                edit: {
+                  isAccessible: ({ currentAdmin }) =>
+                    currentAdmin && currentAdmin.role === 'admin',
+                },
+                bulkDelete: {
+                  isAccessible: ({ currentAdmin }) =>
+                    currentAdmin && currentAdmin.role === 'admin',
+                },
+                bulkDescriptionEdit: {
+                  handler: bulkDescriptionEditAction,
+                  isAccessible: ({ currentAdmin }) =>
+                    currentAdmin && currentAdmin.role === 'admin',
+                },
               },
               sort: {
                 sortBy: 'createdAt',
@@ -79,7 +95,7 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
       },
       auth: {
         authenticate: async (email, password) => {
-          let adminUsers: { email: string; password: string }[];
+          let adminUsers: { email: string; password: string; role: string }[];
 
           try {
             adminUsers = JSON.parse(process.env.ADMIN_USERS);
@@ -95,7 +111,7 @@ const dmmf = (prisma as any)._dmmf as DMMFClass;
             return null;
           }
 
-          return Promise.resolve({ email });
+          return Promise.resolve({ email, role: user.role });
         },
         cookieName: process.env.ADMIN_COOKIE_NAME,
         cookiePassword: process.env.ADMIN_COOKIE_PASSWORD,
