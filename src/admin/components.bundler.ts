@@ -1,7 +1,7 @@
 import AdminJS, { OverridableComponent } from 'adminjs';
 
-const BASE = './';
-const bundle = (path: string, componentName: OverridableComponent = null) =>
+const BASE = './components';
+const bundle = (path: string, componentName?: OverridableComponent) =>
   AdminJS.bundle(`${BASE}/${path}`, componentName);
 
 export const Dashboard = bundle('dashboard');

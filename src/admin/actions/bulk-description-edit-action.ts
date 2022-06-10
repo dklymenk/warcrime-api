@@ -5,7 +5,7 @@ import {
   Action,
   BulkActionResponse,
 } from 'adminjs';
-import { ReportBulkDescriptionEdit } from '../components';
+import { ReportBulkDescriptionEdit } from '../components.bundler';
 
 export const bulkDescriptionEditAction: Action<BulkActionResponse> = {
   name: 'bulkDescriptionEdit',
