@@ -21,7 +21,7 @@ export const CreateReportResource = (): ResourceWithOptions => ({
       'userId',
       'notes',
     ],
-    editProperties: ['status', 'notes'],
+    editProperties: ['status', 'notes', 'description'],
     actions: {
       new: { isAccessible: false },
       delete: {
