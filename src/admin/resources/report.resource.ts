@@ -11,6 +11,7 @@ import { client, dmmf } from './config';
 export const CreateReportResource = (): ResourceWithOptions => ({
   resource: { model: dmmf.modelMap.Report, client },
   options: {
+    navigation: { name: null },
     listProperties: [
       'createdAt',
       'description',
