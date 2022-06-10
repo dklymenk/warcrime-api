@@ -4,7 +4,7 @@ const BASE = './components';
 const bundle = (path: string, componentName?: OverridableComponent) =>
   AdminJS.bundle(`${BASE}/${path}`, componentName);
 
-export const Dashboard = bundle('dashboard');
+export const DASHBOARD = bundle('dashboard');
 export const ReportPhotoList = bundle('report-photo-list');
 export const ReportPhotoShow = bundle('report-photo-show');
 export const ReportLatLongList = bundle('report-latLong-list');

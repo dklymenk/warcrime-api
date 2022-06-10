@@ -1,4 +1,4 @@
-import { Dashboard } from './components.bundler';
+import { DASHBOARD } from './components.bundler';
 import { auth } from './auth';
 import { AdminModuleOptions } from '@adminjs/nestjs';
 import { Database, Resource } from '@adminjs/prisma';
@@ -14,7 +14,7 @@ export const generateAdminModuleOptions = (): AdminModuleOptions => ({
       companyName: 'Харківська правозахисна група',
     },
     dashboard: {
-      component: Dashboard,
+      component: DASHBOARD,
     },
     resources: [CreateReportResource()],
   },
