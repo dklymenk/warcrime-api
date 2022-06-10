@@ -12,3 +12,4 @@ export const ReportLatLongShow = bundle('report-latLong-show');
 export const ReportBulkDescriptionEdit = bundle(
   'report-action-bulk-description-edit',
 );
+export const ReportBulkNotesEdit = bundle('report-action-bulk-notes-edit');
