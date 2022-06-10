@@ -19,8 +19,9 @@ export const CreateReportResource = (): ResourceWithOptions => ({
       'latLong',
       'status',
       'userId',
+      'notes',
     ],
-    editProperties: ['status'],
+    editProperties: ['status', 'notes'],
     actions: {
       new: { isAccessible: false },
       delete: {
