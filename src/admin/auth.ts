@@ -17,7 +17,7 @@ export const auth: AdminModuleOptions['auth'] = {
       return null;
     }
 
-    return Promise.resolve(user);
+    return Promise.resolve({ ...user, title: user.role });
   },
   cookieName: process.env.ADMIN_COOKIE_NAME,
   cookiePassword: process.env.ADMIN_COOKIE_PASSWORD,
