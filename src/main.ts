@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
-import { json } from 'body-parser';
+import { json, raw } from 'body-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -13,7 +13,11 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'), {
     setHeaders: (res) => res.setHeader('Access-Control-Allow-Origin', '*'),
   });
-  app.use(json({ limit: '50mb' }));
+  app.use(json({ limit: '50mb', type: 'application/json' }));
+  app.use(
+    '/upload/raw',
+    raw({ limit: '500mb', type: ['video/mp4', 'image/jpeg'] }),
+  );
   app.enableCors();
   await app.listen(process.env.PORT || '3000');
 }

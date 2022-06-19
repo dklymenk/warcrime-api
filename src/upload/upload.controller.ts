@@ -2,12 +2,17 @@ import {
   Body,
   Controller,
   Post,
+  Req,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { writeFile } from 'fs';
 import { UploadInterceptor } from './upload.interceptor';
 import { UploadService } from './upload.service';
+
+interface RequestWithBody extends Express.Request {
+  body: Buffer;
+}
 
 @Controller('upload')
 export class UploadController {
@@ -26,6 +31,20 @@ export class UploadController {
   ) {
     const buffer = Buffer.from(base64, 'base64');
     const newFilename = this.uploadService.getNewFilename(filename);
+    const filePath = `./public/files/${newFilename}`;
+    writeFile(filePath, buffer, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+    return { filename: newFilename };
+  }
+
+  // take raw file and save it to disk
+  @Post('/raw')
+  async uploadRawFile(@Req() req: RequestWithBody) {
+    const buffer = req.body;
+    const newFilename = this.uploadService.getNewFilename('baguette.jpeg');
     const filePath = `./public/files/${newFilename}`;
     writeFile(filePath, buffer, (err) => {
       if (err) {

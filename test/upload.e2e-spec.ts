@@ -1,5 +1,6 @@
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { Test, TestingModule } from '@nestjs/testing';
+import { raw } from 'body-parser';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { UploadModule } from 'src/upload/upload.module';
@@ -18,6 +19,10 @@ describe('UploadContoller (e2e)', () => {
     app.useStaticAssets(join(__dirname, '..', 'public'), {
       setHeaders: (res) => res.setHeader('Access-Control-Allow-Origin', '*'),
     });
+    app.use(
+      '/upload/raw',
+      raw({ limit: '500mb', type: ['video/mp4', 'image/jpeg'] }),
+    );
     await app.init();
   });
 
@@ -47,6 +52,27 @@ describe('UploadContoller (e2e)', () => {
         base64: readFileSync('./test/baguette.jpeg').toString('base64'),
         filename: 'baguette.jpeg',
       });
+    expect(uploadResponse.status).toEqual(201);
+    expect(uploadResponse.body.filename).toMatch(
+      /^baguette-[a-z0-9]{4,}\.jpeg$/,
+    );
+
+    const fileResponse = await request(app.getHttpServer()).get(
+      `/files/${uploadResponse.body.filename}`,
+    );
+    expect(fileResponse.status).toEqual(200);
+    expect(fileResponse.body.toString()).toBe(
+      readFileSync('./test/baguette.jpeg').toString(),
+    );
+  });
+
+  it('/upload/raw (POST)', async () => {
+    // send baguette as raw stream
+    const buffer = readFileSync('./test/baguette.jpeg');
+    const uploadResponse = await request(app.getHttpServer())
+      .post('/upload/raw')
+      .set('Content-Type', 'image/jpeg')
+      .send(buffer);
     expect(uploadResponse.status).toEqual(201);
     expect(uploadResponse.body.filename).toMatch(
       /^baguette-[a-z0-9]{4,}\.jpeg$/,
