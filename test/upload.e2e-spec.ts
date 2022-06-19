@@ -66,24 +66,43 @@ describe('UploadContoller (e2e)', () => {
     );
   });
 
-  it('/upload/raw (POST)', async () => {
-    // send baguette as raw stream
-    const buffer = readFileSync('./test/baguette.jpeg');
-    const uploadResponse = await request(app.getHttpServer())
-      .post('/upload/raw')
-      .set('Content-Type', 'image/jpeg')
-      .send(buffer);
-    expect(uploadResponse.status).toEqual(201);
-    expect(uploadResponse.body.filename).toMatch(
-      /^baguette-[a-z0-9]{4,}\.jpeg$/,
-    );
+  describe('/upload/raw (POST)', () => {
+    it('should return correct extension for image', async () => {
+      // send baguette as raw stream
+      const buffer = readFileSync('./test/baguette.jpeg');
+      const uploadResponse = await request(app.getHttpServer())
+        .post('/upload/raw')
+        .set('Content-Type', 'image/jpeg')
+        .send(buffer);
+      expect(uploadResponse.status).toEqual(201);
+      expect(uploadResponse.body.filename).toContain('.jpeg');
 
-    const fileResponse = await request(app.getHttpServer()).get(
-      `/files/${uploadResponse.body.filename}`,
-    );
-    expect(fileResponse.status).toEqual(200);
-    expect(fileResponse.body.toString()).toBe(
-      readFileSync('./test/baguette.jpeg').toString(),
-    );
+      const fileResponse = await request(app.getHttpServer()).get(
+        `/files/${uploadResponse.body.filename}`,
+      );
+      expect(fileResponse.status).toEqual(200);
+      expect(fileResponse.body.toString()).toBe(
+        readFileSync('./test/baguette.jpeg').toString(),
+      );
+    });
+
+    it('should return correct extension for video', async () => {
+      // send baguette as raw stream
+      const buffer = readFileSync('./test/aBgBrQD_460svav1.mp4');
+      const uploadResponse = await request(app.getHttpServer())
+        .post('/upload/raw')
+        .set('Content-Type', 'video/mp4')
+        .send(buffer);
+      expect(uploadResponse.status).toEqual(201);
+      expect(uploadResponse.body.filename).toContain('.mp4');
+
+      const fileResponse = await request(app.getHttpServer()).get(
+        `/files/${uploadResponse.body.filename}`,
+      );
+      expect(fileResponse.status).toEqual(200);
+      expect(fileResponse.body.toString()).toBe(
+        readFileSync('./test/aBgBrQD_460svav1.mp4').toString(),
+      );
+    });
   });
 });

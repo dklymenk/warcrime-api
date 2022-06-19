@@ -10,7 +10,7 @@ import { writeFile } from 'fs';
 import { UploadInterceptor } from './upload.interceptor';
 import { UploadService } from './upload.service';
 
-interface RequestWithBody extends Express.Request {
+interface RequestWithBufferBody extends Omit<Request, 'body'> {
   body: Buffer;
 }
 
@@ -42,9 +42,11 @@ export class UploadController {
 
   // take raw file and save it to disk
   @Post('/raw')
-  async uploadRawFile(@Req() req: RequestWithBody) {
+  async uploadRawFile(@Req() req: RequestWithBufferBody) {
     const buffer = req.body;
-    const newFilename = this.uploadService.getNewFilename('baguette.jpeg');
+    const newFilename = this.uploadService.generateFilename(
+      req.headers['content-type'],
+    );
     const filePath = `./public/files/${newFilename}`;
     writeFile(filePath, buffer, (err) => {
       if (err) {
