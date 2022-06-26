@@ -1,5 +1,6 @@
 import { ResourceWithOptions } from 'adminjs';
 import { bulkDescriptionEditAction, bulkNotesEditAction } from '../actions';
+import { bulkStatusEditAction } from '../actions/bulk-status-edit-action';
 import {
   ReportLatLongList,
   ReportLatLongShow,
@@ -38,6 +39,7 @@ export const CreateReportResource = (): ResourceWithOptions => ({
       },
       bulkDescriptionEdit: bulkDescriptionEditAction,
       bulkNotesEdit: bulkNotesEditAction,
+      bulkStatusEdit: bulkStatusEditAction,
     },
     sort: {
       sortBy: 'createdAt',

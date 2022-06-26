@@ -13,3 +13,4 @@ export const ReportBulkDescriptionEdit = bundle(
   'report-action-bulk-description-edit',
 );
 export const ReportBulkNotesEdit = bundle('report-action-bulk-notes-edit');
+export const ReportBulkStatusEdit = bundle('report-action-bulk-status-edit');
