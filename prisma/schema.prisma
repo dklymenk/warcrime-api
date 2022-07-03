@@ -18,11 +18,11 @@ enum ReportStatus {
 
 model Report {
   id          String       @id
-  description String
+  description String       @db.LongText
   photo       String
   status      ReportStatus @default(UPLOADED)
   latLong     String?
-  notes       String?
+  notes       String?      @db.LongText
   createdAt   DateTime     @default(now())
   userId      String
   user        User         @relation(fields: [userId], references: [id])

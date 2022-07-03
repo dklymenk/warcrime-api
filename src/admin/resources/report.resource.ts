@@ -59,6 +59,12 @@ export const CreateReportResource = (): ResourceWithOptions => ({
           show: ReportLatLongShow,
         },
       },
+      description: {
+        type: 'textarea',
+      },
+      notes: {
+        type: 'textarea',
+      },
       user: {
         components: {
           // TODO
