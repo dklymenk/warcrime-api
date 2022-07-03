@@ -22,6 +22,11 @@ export const CreateUserResource = (): ResourceWithOptions => ({
           currentAdmin && currentAdmin.role === 'admin',
       },
     },
+    properties: {
+      notes: {
+        isTitle: true,
+      },
+    },
     sort: {
       sortBy: 'createdAt',
       direction: 'desc',

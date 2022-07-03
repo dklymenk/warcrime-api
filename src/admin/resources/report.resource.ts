@@ -6,6 +6,7 @@ import {
   ReportLatLongShow,
   ReportPhotoShow,
   ReportPhotoList,
+  ReportUserList,
 } from '../components.bundler';
 import { client, dmmf } from './config';
 
@@ -19,7 +20,7 @@ export const CreateReportResource = (): ResourceWithOptions => ({
       'photo',
       'latLong',
       'status',
-      'userId',
+      'user',
       'notes',
     ],
     editProperties: ['status', 'notes', 'description'],
@@ -56,6 +57,12 @@ export const CreateReportResource = (): ResourceWithOptions => ({
         components: {
           list: ReportLatLongList,
           show: ReportLatLongShow,
+        },
+      },
+      user: {
+        components: {
+          // TODO
+          // list: ReportUserList,
         },
       },
     },
