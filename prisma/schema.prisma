@@ -20,9 +20,17 @@ model Report {
   id          String       @id
   description String
   photo       String
-  userId      String
   status      ReportStatus @default(UPLOADED)
   latLong     String?
+  notes       String?
+  createdAt   DateTime     @default(now())
+  userId      String
+  user        User         @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id          String       @id
+  reports     Report[]
   notes       String?
   createdAt   DateTime     @default(now())
 }

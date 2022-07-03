@@ -3,7 +3,7 @@ import { auth } from './auth';
 import { AdminModuleOptions } from '@adminjs/nestjs';
 import { Database, Resource } from '@adminjs/prisma';
 import AdminJS from 'adminjs';
-import { CreateReportResource } from './resources';
+import { CreateReportResource, CreateUserResource } from './resources';
 
 AdminJS.registerAdapter({ Database, Resource });
 
@@ -16,7 +16,7 @@ export const generateAdminModuleOptions = (): AdminModuleOptions => ({
     dashboard: {
       component: DASHBOARD,
     },
-    resources: [CreateReportResource()],
+    resources: [CreateReportResource(), CreateUserResource()],
   },
   auth,
 });
