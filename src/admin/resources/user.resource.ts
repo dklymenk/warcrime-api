@@ -25,6 +25,7 @@ export const CreateUserResource = (): ResourceWithOptions => ({
     properties: {
       notes: {
         isTitle: true,
+        type: 'textarea',
       },
     },
     sort: {
