@@ -7,7 +7,11 @@ import { CreateReportDto } from './dto/create-report.dto';
 export class ReportsService {
   constructor(private prisma: PrismaService) {}
 
-  create(createReportDto: CreateReportDto) {
+  async create(createReportDto: CreateReportDto) {
+    try {
+      await this.prisma.user.create({ data: { id: createReportDto.userId } });
+    } catch (error) {}
+
     return this.prisma.report.create({
       data: createReportDto,
     });

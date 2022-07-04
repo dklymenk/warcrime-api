@@ -19,6 +19,7 @@ describe('ReportController (e2e)', () => {
 
     const prismaService = app.get<PrismaService>(PrismaService);
     await prismaService.report.deleteMany({});
+    await prismaService.user.deleteMany({});
 
     await app.init();
   });
