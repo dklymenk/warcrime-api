@@ -1,6 +1,6 @@
-import { AdminModuleOptions } from '@adminjs/nestjs';
+import { AuthenticationOptions } from '@adminjs/express';
 
-export const auth: AdminModuleOptions['auth'] = {
+export const auth: AuthenticationOptions = {
   authenticate: async (email: string, password: string) => {
     let adminUsers: { email: string; password: string; role: string }[];
 

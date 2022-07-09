@@ -4,11 +4,15 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 import { json, raw } from 'body-parser';
+import { setupAdminJS } from './admin';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bodyParser: false,
   });
+
+  await setupAdminJS(app);
+
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useStaticAssets(join(__dirname, '..', 'public'), {
     setHeaders: (res) => res.setHeader('Access-Control-Allow-Origin', '*'),
