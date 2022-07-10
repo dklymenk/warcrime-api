@@ -4,7 +4,7 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ReportsModule } from 'src/reports/reports.module';
 import { ReportsService } from 'src/reports/reports.service';
-import * as request from 'supertest';
+import request from 'supertest';
 
 describe('ReportController (e2e)', () => {
   let app: NestExpressApplication;

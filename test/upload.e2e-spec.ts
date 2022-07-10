@@ -4,7 +4,7 @@ import { raw } from 'body-parser';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { UploadModule } from 'src/upload/upload.module';
-import * as request from 'supertest';
+import request from 'supertest';
 
 describe('UploadContoller (e2e)', () => {
   let app: NestExpressApplication;
