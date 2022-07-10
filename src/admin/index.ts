@@ -5,7 +5,6 @@ import AdminJS, { AdminJSOptions } from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
 import { CreateReportResource, CreateUserResource } from './resources';
 import { INestApplication } from '@nestjs/common';
-import { AbstractHttpAdapter, HttpAdapterHost } from '@nestjs/core';
 
 AdminJS.registerAdapter({ Database, Resource });
 
@@ -21,10 +20,9 @@ const generateAdminJSConfig = (): AdminJSOptions => ({
 });
 
 export const setupAdminJS = async (app: INestApplication): Promise<void> => {
-  const expressApp: AbstractHttpAdapter = app.get(HttpAdapterHost).httpAdapter;
   const config = generateAdminJSConfig();
   const adminJS = new AdminJS(config);
-  expressApp.use(
+  app.use(
     adminJS.options.rootPath,
     AdminJSExpress.buildAuthenticatedRouter(adminJS, auth),
   );
