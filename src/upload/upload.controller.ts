@@ -6,7 +6,7 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { writeFile } from 'fs';
+import { writeFileSync } from 'fs';
 import { UploadInterceptor } from './upload.interceptor';
 import { UploadService } from './upload.service';
 
@@ -32,11 +32,7 @@ export class UploadController {
     const buffer = Buffer.from(base64, 'base64');
     const newFilename = this.uploadService.getNewFilename(filename);
     const filePath = `./public/files/${newFilename}`;
-    writeFile(filePath, buffer, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
+    writeFileSync(filePath, buffer);
     return { filename: newFilename };
   }
 
@@ -48,11 +44,7 @@ export class UploadController {
       req.headers['content-type'],
     );
     const filePath = `./public/files/${newFilename}`;
-    writeFile(filePath, buffer, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
+    writeFileSync(filePath, buffer);
     return { filename: newFilename };
   }
 }
