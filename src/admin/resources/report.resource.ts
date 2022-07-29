@@ -1,4 +1,5 @@
 import { ResourceWithOptions } from 'adminjs';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { bulkDescriptionEditAction, bulkNotesEditAction } from '../actions';
 import { bulkStatusEditAction } from '../actions/bulk-status-edit-action';
 import {
@@ -8,10 +9,12 @@ import {
   ReportPhotoList,
   // ReportUserList,
 } from '../components.bundler';
-import { client, dmmf } from './config';
+import { getDmmf } from './config';
 
-export const CreateReportResource = (): ResourceWithOptions => ({
-  resource: { model: dmmf.modelMap.Report, client },
+export const CreateReportResource = (
+  prisma: PrismaService,
+): ResourceWithOptions => ({
+  resource: { model: getDmmf(prisma).modelMap.Report, client: prisma },
   options: {
     navigation: { name: null },
     listProperties: [

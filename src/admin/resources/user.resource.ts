@@ -1,8 +1,11 @@
 import { ResourceWithOptions } from 'adminjs';
-import { client, dmmf } from './config';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { getDmmf } from './config';
 
-export const CreateUserResource = (): ResourceWithOptions => ({
-  resource: { model: dmmf.modelMap.User, client },
+export const CreateUserResource = (
+  prisma: PrismaService,
+): ResourceWithOptions => ({
+  resource: { model: getDmmf(prisma).modelMap.User, client: prisma },
   options: {
     navigation: { name: null },
     listProperties: ['id', 'createdAt', 'notes'],
