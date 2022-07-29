@@ -22,4 +22,4 @@ client.$use(async (params, next) => {
   return result;
 });
 
-export const dmmf = (client as any)._dmmf as DMMFClass;
+export const dmmf = (client as any)._baseDmmf as DMMFClass;
