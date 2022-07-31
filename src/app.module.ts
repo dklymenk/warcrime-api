@@ -8,6 +8,7 @@ import { UploadModule } from './upload/upload.module';
 import { AdminModule } from '@adminjs/nestjs';
 import { generateAdminModuleOptions } from './admin';
 import { PrismaService } from './prisma/prisma.service';
+import { GoogleDriveModule } from './google-drive/google-drive.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { PrismaService } from './prisma/prisma.service';
       useFactory: generateAdminModuleOptions,
     }),
     UploadModule,
+    GoogleDriveModule,
   ],
   controllers: [AppController],
   providers: [AppService],
