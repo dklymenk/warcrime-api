@@ -66,4 +66,22 @@ export class GoogleDriveService implements OnModuleInit {
       supportsAllDrives: true,
     });
   }
+
+  async getFileWebContentLink(fileId: string) {
+    const res = await google.drive('v3').files.get({
+      fileId,
+      supportsAllDrives: true,
+      fields: 'webContentLink',
+    });
+    return res.data;
+  }
+
+  async getFileName(fileId: string) {
+    const res = await google.drive('v3').files.get({
+      fileId,
+      supportsAllDrives: true,
+      fields: 'name',
+    });
+    return res.data;
+  }
 }
