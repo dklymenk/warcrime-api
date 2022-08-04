@@ -1,4 +1,5 @@
 import { BasePropertyProps, PropertyPlace } from 'adminjs';
+import { Icon } from '@adminjs/design-system';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -14,6 +15,7 @@ const ReportPhoto = (props: BasePropertyProps) => {
   const filename = url.split('/').pop();
   const [type, setType] = useState<string>(null);
   const [status, setStatus] = useState<number>(null);
+  const [copied, setCopied] = useState<boolean>(false);
   useEffect(() => {
     (async () => {
       const head = await fetch(url, { method: 'HEAD' });
@@ -36,7 +38,15 @@ const ReportPhoto = (props: BasePropertyProps) => {
         {type?.includes('image') && <img width={width[where]} src={url}></img>}
       </a>
       {status === 404 ? (
-        <span>{filename}</span>
+        <span
+          onClick={(e) => {
+            e.stopPropagation();
+            navigator.clipboard.writeText(filename);
+            setCopied(true);
+          }}
+        >
+          <Icon icon={copied ? 'Checkmark' : 'Copy'} /> {filename}
+        </span>
       ) : (
         <a download href={url}>
           ⬇️ DOWNLOAD
