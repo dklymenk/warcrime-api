@@ -5,8 +5,7 @@ import { lookup } from 'mime-types';
 
 @Injectable()
 export class GoogleDriveService implements OnModuleInit {
-  private parentFolderId =
-    process.env.GOOGLE_DRIVE_FOLDER || '1erdkcbGqTljnpogy2RkNPlV24Vcy34pR';
+  private parentFolderId = process.env.GOOGLE_DRIVE_FOLDER;
 
   setParentFolderId(parentFolderId: string) {
     this.parentFolderId = parentFolderId;
@@ -22,6 +21,10 @@ export class GoogleDriveService implements OnModuleInit {
   }
 
   async uploadFile(filePath: string) {
+    if (!this.parentFolderId) {
+      throw new Error('No parent folder ID set');
+    }
+
     const filename = filePath.split('/').pop();
     const mimeType = lookup(filePath);
     if (!mimeType) {
@@ -41,14 +44,6 @@ export class GoogleDriveService implements OnModuleInit {
       supportsAllDrives: true,
     });
     const fileId = res.data.id;
-    await google.drive('v3').permissions.create({
-      fileId,
-      supportsAllDrives: true,
-      requestBody: {
-        role: 'reader',
-        type: 'anyone',
-      },
-    });
     return fileId;
   }
 

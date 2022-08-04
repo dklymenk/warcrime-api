@@ -9,6 +9,9 @@ import { AdminModule } from '@adminjs/nestjs';
 import { generateAdminModuleOptions } from './admin';
 import { PrismaService } from './prisma/prisma.service';
 import { GoogleDriveModule } from './google-drive/google-drive.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksModule } from './tasks/tasks.module';
+import { LocalStorageModule } from './local-storage/local-storage.module';
 
 @Module({
   imports: [
@@ -21,6 +24,9 @@ import { GoogleDriveModule } from './google-drive/google-drive.module';
     }),
     UploadModule,
     GoogleDriveModule,
+    ScheduleModule.forRoot(),
+    TasksModule,
+    LocalStorageModule,
   ],
   controllers: [AppController],
   providers: [AppService],
