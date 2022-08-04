@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Cron } from '@nestjs/schedule';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { GoogleDriveService } from 'src/google-drive/google-drive.service';
 import { LocalStorageService } from 'src/local-storage/local-storage.service';
 
@@ -12,7 +12,7 @@ export class TasksService {
     private googleDriveService: GoogleDriveService,
   ) {}
 
-  @Cron('30 17 * * *')
+  @Cron(CronExpression.EVERY_WEEK)
   async archiveUploads() {
     // 1. Find all uploads that are older than 2 months
     // 2. Upload them to Google Drive
