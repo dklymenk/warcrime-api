@@ -1,4 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { GoogleDriveService } from 'src/google-drive/google-drive.service';
+import { LocalStorageService } from 'src/local-storage/local-storage.service';
 import { TasksService } from './tasks.service';
 
 describe('TasksService', () => {
@@ -6,7 +8,7 @@ describe('TasksService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TasksService],
+      providers: [TasksService, LocalStorageService, GoogleDriveService],
     }).compile();
 
     service = module.get<TasksService>(TasksService);

@@ -1,7 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GoogleDriveService } from './google-drive.service';
-import request from 'supertest';
-import { readFileSync } from 'fs';
 
 describe('GoogleDriveService', () => {
   let service: GoogleDriveService;
@@ -26,21 +24,6 @@ describe('GoogleDriveService', () => {
 
     const fileId = await service.uploadFile('./test/baguette.jpeg');
     expect(fileId).toBeDefined();
-
-    const fileUrl = service.getFileUrl(fileId);
-    expect(fileUrl).toBeDefined();
-
-    const url = new URL(fileUrl);
-    const host = url.host;
-    const path = url.pathname;
-    const search = url.search;
-    const fileResponse = await request(host)
-      .get(path + search)
-      .redirects(2);
-    expect(fileResponse.status).toEqual(200);
-    expect(fileResponse.body.toString()).toBe(
-      readFileSync('./test/baguette.jpeg').toString(),
-    );
 
     await service.deleteFile(fileId);
   });
