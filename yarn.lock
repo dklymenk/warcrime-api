@@ -5073,6 +5073,11 @@ jest-resolve@^28.1.3:
     resolve.exports "^1.1.0"
     slash "^3.0.0"
 
+jest-runner-groups@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/jest-runner-groups/-/jest-runner-groups-2.2.0.tgz#e8ac453322c1f001086f4ea0299b8c4c5bd89166"
+  integrity sha512-Sp/B9ZX0CDAKa9dIkgH0sGyl2eDuScV4SVvOxqhBMxqWpsNAkmol/C58aTFmPWZj+C0ZTW1r1BSu66MTCN+voA==
+
 jest-runner@^28.1.3:
   version "28.1.3"
   resolved "https://registry.yarnpkg.com/jest-runner/-/jest-runner-28.1.3.tgz#5eee25febd730b4713a2cdfd76bdd5557840f9a1"

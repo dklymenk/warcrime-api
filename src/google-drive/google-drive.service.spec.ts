@@ -19,6 +19,9 @@ describe('GoogleDriveService', () => {
     expect(service).toBeDefined();
   });
 
+  /**
+   * @group integration
+   */
   it('should allow to upload and delete files', async () => {
     service.setParentFolderId('1ty36h_OkNdwt_2De6mm7D6XImqpJjv2m');
 
