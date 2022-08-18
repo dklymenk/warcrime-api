@@ -12,7 +12,7 @@ export class TasksService {
     private googleDriveService: GoogleDriveService,
   ) {}
 
-  @Cron(CronExpression.EVERY_WEEK)
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async archiveUploads() {
     // 1. Find all uploads that are older than 2 months
     // 2. Upload them to Google Drive
@@ -21,7 +21,7 @@ export class TasksService {
     this.logger.log('Archiving uploads');
 
     const uploads =
-      await this.localStorageService.findUploadsOlderThan2Months();
+      await this.localStorageService.findUploadsOlderThanOneMonth();
 
     this.logger.log(`Found ${uploads.length} uploads`);
 

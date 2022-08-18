@@ -8,7 +8,7 @@ export class LocalStorageService {
     return './public/files';
   }
 
-  async findUploadsOlderThan2Months() {
+  async findUploadsOlderThanOneMonth() {
     const uploadsDir = this.getUploadsDir();
     const files = readdirSync(uploadsDir);
     const uploads = await Promise.all(
@@ -25,8 +25,7 @@ export class LocalStorageService {
       .filter((upload) => {
         return (
           upload.stats.isFile() &&
-          upload.stats.mtime.getTime() <
-            Date.now() - 1000 * 60 * 60 * 24 * 30 * 2
+          upload.stats.mtime.getTime() < Date.now() - 1000 * 60 * 60 * 24 * 30
         );
       })
       .map((upload) => {
