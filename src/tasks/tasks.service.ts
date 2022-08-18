@@ -12,7 +12,7 @@ export class TasksService {
     private googleDriveService: GoogleDriveService,
   ) {}
 
-  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
+  @Cron(CronExpression.EVERY_DAY_AT_9PM)
   async archiveUploads() {
     // 1. Find all uploads that are older than 2 months
     // 2. Upload them to Google Drive
