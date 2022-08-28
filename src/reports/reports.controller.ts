@@ -3,6 +3,7 @@ import {
   // Get,
   Post,
   Body,
+  HttpException,
   // Patch,
   // Param,
   // Delete,
@@ -17,6 +18,9 @@ export class ReportsController {
 
   @Post()
   create(@Body() createReportDto: CreateReportDto) {
+    if (createReportDto.photo.endsWith('undefined')) {
+      throw new HttpException('Photo is required', 400);
+    }
     return this.reportsService.create(createReportDto);
   }
 
