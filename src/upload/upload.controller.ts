@@ -24,6 +24,18 @@ export class UploadController {
     return { filename: file.filename };
   }
 
+  // take base64 encoded image and save it to disk
+  @Post('/base64')
+  async uploadBase64File(
+    @Body() { base64, filename }: { base64: string; filename: string },
+  ) {
+    const buffer = Buffer.from(base64, 'base64');
+    const newFilename = this.uploadService.getNewFilename(filename);
+    const filePath = `./public/files/${newFilename}`;
+    writeFileSync(filePath, buffer);
+    return { filename: newFilename };
+  }
+
   // take raw file and save it to disk
   @Post('/raw')
   async uploadRawFile(@Req() req: RequestWithBufferBody) {
