@@ -17,8 +17,10 @@ export class UploadInterceptor implements NestInterceptor {
       storage: diskStorage({
         destination: './public/files',
         filename: (_req, file, callback) => {
-          const filename = this.uploadService.generateFilename(file.mimetype);
-          callback(null, filename);
+          const newFilename = this.uploadService.getNewFilename(
+            file.originalname,
+          );
+          callback(null, newFilename);
         },
       }),
     });
