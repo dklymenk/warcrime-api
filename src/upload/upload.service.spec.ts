@@ -31,4 +31,49 @@ describe('UploadService', () => {
       expect(name.length).toBeGreaterThanOrEqual(8);
     });
   });
+
+  describe('validateContentDisposition', () => {
+    it('should throw an error when Content-Disposition header is missing', () => {
+      expect(() =>
+        service.validateContentDisposition({}),
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Content-Disposition header is missing"`,
+      );
+    });
+
+    it.each([
+      [
+        {
+          'content-disposition': 'form-data; filename="baguette.jpeg"',
+        },
+      ],
+      [
+        {
+          'content-disposition': 'attachment; filenam="baguette.jpeg";',
+        },
+      ],
+      [
+        {
+          'content-disposition': 'attachment; filename="foo"',
+        },
+      ],
+      [
+        {
+          'content-disposition': 'attachment; filename=""',
+        },
+      ],
+    ])(
+      'should throw an error when Content-Disposition header is %i',
+      (headers) => {
+        expect(() => service.validateContentDisposition(headers)).toThrow();
+      },
+    );
+
+    it('should return filename when Content-Disposition header is valid', () => {
+      const headers = {
+        'content-disposition': 'attachment; filename="baguette.jpeg"',
+      };
+      expect(service.validateContentDisposition(headers)).toBe('baguette.jpeg');
+    });
+  });
 });

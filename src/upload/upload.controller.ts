@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Post,
@@ -28,9 +29,14 @@ export class UploadController {
   @Post('/raw')
   async uploadRawFile(@Req() req: RequestWithBufferBody) {
     const buffer = req.body;
-    const newFilename = this.uploadService.generateFilename(
-      req.headers['content-type'],
-    );
+
+    if (!req.headers['content-disposition']) {
+      throw new BadRequestException('Content-Disposition header is missing');
+    }
+
+    const filename = this.uploadService.validateContentDisposition(req.headers);
+
+    const newFilename = this.uploadService.getNewFilename(filename);
     const filePath = `./public/files/${newFilename}`;
     writeFileSync(filePath, buffer);
     return { filename: newFilename };
