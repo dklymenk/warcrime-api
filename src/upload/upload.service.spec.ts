@@ -26,24 +26,9 @@ describe('UploadService', () => {
       expect(service.generateFilename('video/mp4')).toContain('.mp4');
     });
 
-    it('should generate name that is at least 30 characters long', () => {
+    it('should generate name that is at least 8 characters long', () => {
       const { name } = parse(service.generateFilename('image/jpeg'));
-      expect(name.length).toBeGreaterThanOrEqual(24);
-    });
-
-    it('starts with "WC_" prefix', () => {
-      expect(service.generateFilename('image/jpeg')).toMatch(/^WC_/);
-    });
-
-    it('contains current datetime', () => {
-      jest.useFakeTimers();
-      jest.setSystemTime(new Date('2020-01-02 03:02:01'));
-
-      expect(service.generateFilename('image/jpeg')).toMatch(
-        /2020-01-02_03-02-01/,
-      );
-
-      jest.useRealTimers();
+      expect(name.length).toBeGreaterThanOrEqual(8);
     });
   });
 });

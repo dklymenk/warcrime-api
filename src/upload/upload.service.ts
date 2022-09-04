@@ -16,17 +16,10 @@ export class UploadService {
 
   generateFilename(mime: string): string {
     const extname = extension(mime);
-    const randomName = Array(4)
+    const randomName = Array(16)
       .fill(null)
       .map(() => Math.round(Math.random() * 16).toString(16))
       .join('');
-
-    const date = new Date();
-    const dateTimeString = date
-      .toLocaleString('sv')
-      .replace(/:/g, '-')
-      .replace(/\s/g, '_');
-
-    return `WC_${dateTimeString}_${randomName}.${extname}`;
+    return `${randomName}.${extname}`;
   }
 }
