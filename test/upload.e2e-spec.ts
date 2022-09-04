@@ -44,28 +44,6 @@ describe('UploadContoller (e2e)', () => {
     );
   });
 
-  it('/upload/base64 (POST)', async () => {
-    // send baguette as base64 string
-    const uploadResponse = await request(app.getHttpServer())
-      .post('/upload/base64')
-      .send({
-        base64: readFileSync('./test/baguette.jpeg').toString('base64'),
-        filename: 'baguette.jpeg',
-      });
-    expect(uploadResponse.status).toEqual(201);
-    expect(uploadResponse.body.filename).toMatch(
-      /^baguette-[a-z0-9]{4,}\.jpeg$/,
-    );
-
-    const fileResponse = await request(app.getHttpServer()).get(
-      `/files/${uploadResponse.body.filename}`,
-    );
-    expect(fileResponse.status).toEqual(200);
-    expect(fileResponse.body.toString()).toBe(
-      readFileSync('./test/baguette.jpeg').toString(),
-    );
-  });
-
   describe('/upload/raw (POST)', () => {
     it('should return correct extension for image', async () => {
       // send baguette as raw stream
