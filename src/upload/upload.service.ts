@@ -11,7 +11,7 @@ export class UploadService {
       .fill(null)
       .map(() => Math.round(Math.random() * 16).toString(16))
       .join('');
-    return `${name}-${randomName}${extension}`;
+    return `${name}_${randomName}${extension}`;
   }
 
   generateFilename(mime: string): string {

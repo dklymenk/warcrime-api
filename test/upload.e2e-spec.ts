@@ -32,7 +32,7 @@ describe('UploadContoller (e2e)', () => {
       .attach('file', './test/baguette.jpeg');
     expect(uploadResponse.status).toEqual(201);
     expect(uploadResponse.body.filename).toMatch(
-      /^baguette-[a-z0-9]{4,}\.jpeg$/,
+      /^baguette_[a-z0-9]{4,}\.jpeg$/,
     );
 
     const fileResponse = await request(app.getHttpServer()).get(
@@ -55,7 +55,7 @@ describe('UploadContoller (e2e)', () => {
         .send(buffer);
       expect(uploadResponse.status).toEqual(201);
       expect(uploadResponse.body.filename).toMatch(
-        /^baguette-[a-z0-9]{4,}\.jpeg$/,
+        /^baguette_[a-z0-9]{4,}\.jpeg$/,
       );
 
       const fileResponse = await request(app.getHttpServer()).get(
@@ -80,7 +80,7 @@ describe('UploadContoller (e2e)', () => {
         .send(buffer);
       expect(uploadResponse.status).toEqual(201);
       expect(uploadResponse.body.filename).toMatch(
-        /^aBgBrQD_460svav1-[a-z0-9]{4,}\.mp4$/,
+        /^aBgBrQD_460svav1_[a-z0-9]{4,}\.mp4$/,
       );
 
       const fileResponse = await request(app.getHttpServer()).get(
